@@ -1,0 +1,16 @@
+#board {
+  display: flex;
+}
+.todo {
+  height: 50px;
+  width: 50px;
+  background-color: aquamarine;
+  margin: 10px;
+}
+
+.drop {
+  height: 50vh;
+  width: 70px;
+  background-color: rgb(20, 20, 20);
+  margin: 50px;
+}
