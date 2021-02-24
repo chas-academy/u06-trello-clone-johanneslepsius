@@ -6,35 +6,137 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous" defer></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
-        integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
+        integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous" defer></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <div id="board">
-        <div id="tododrop" class="drop">
-            <div id="todo1" class="todo">
+    <input type="checkbox" id="showReview">Show Review Board</input>
+    <form>
+        <label for="info 1">info 1</label>
+        <input type="text" name="info1">
 
+        <label for="info 2">info 2</label>
+        <input type="text" name="info2">
+
+        <label for="info 3">info 3</label>
+        <input type="text" name="info3">
+
+        <label for="deadline">deadline</label>
+        <input type="text" class="deadline" name="deadline">
+        
+        <button type="submit">Create</button>
+    </form>
+    <div id="board">
+        <div id="backlog" class="drop">
+            <h4>Backlog</h4>
+            <div id="todo1" class="todo" data-id="#dialog1">
+                <div class="dialog" id="dialog1">
+                    <div class="tabs">
+                        <ul>
+                            <li><a href="#fragment-1..">info 1</a></li>
+                            <li><a href="#fragment-2..">info 2</a></li>
+                            <li><a href="#fragment-3..">info 3</a></li>
+                        </ul>
+                        <div id="fragment-1..">zsdfsdafasfdsdfblah</div>
+                        <div id="fragment-2..">asdfasdfafdasdfmer blah</div>
+                        <div id="fragment-3..">aasdfasdfsdfännu mer blah</div>
+                    </div>
+                    <p>Deadline:<input type="text" class="deadline"></p>
+                </div>
+            </div>
+            <div id="todo2" class="todo" data-id="#dialog2">
+            
+                <div class="dialog" id="dialog2">
+                    <div class="tabs">
+                        <ul>
+                            <li><a href="#fragment-1.">info 1</a></li>
+                            <li><a href="#fragment-2.">info 2</a></li>
+                            <li><a href="#fragment-3.">info 3</a></li>
+                        </ul>
+                        <div id="fragment-1.">sdfblah</div>
+                        <div id="fragment-2.">asdfmer blah</div>
+                        <div id="fragment-3.">sdfännu mer blah</div>
+                    </div>
+                    <p>Deadline:<input type="text" class="deadline"></p>
+                </div>
+            </div>
+            <div id="todo3" class="todo" data-id="#dialog3">
+            
+                <div class="dialog" id="dialog3">
+                    <div class="tabs">
+                        <ul>
+                            <li><a href="#fragment-1">info 1</a></li>
+                            <li><a href="#fragment-2">info 2</a></li>
+                            <li><a href="#fragment-3">info 3</a></li>
+                        </ul>
+                        <div id="fragment-1">blah</div>
+                        <div id="fragment-2">mer blah</div>
+                        <div id="fragment-3">ännu mer blah</div>
+                    </div>
+                    <p>Deadline:<input type="text" class="deadline"></p>
+                </div>
             </div>
         </div>
-        <div id="develop" class="drop">
-            <div id="todo2" class="todo">
-        
+        <div id="todo" class="drop">
+            <h4>To Do</h4>
+            <div class="snapcontainer">
+                
             </div>
+            <div class="snapcontainer"></div>
+            <div class="snapcontainer"></div>
+            <div class="snapcontainer"></div>
+            <div class="snapcontainer"></div>
         </div>
-        <div id="test" class="drop">
-            <div id="todo3" class="todo">
-        
+        <div id="doing" class="drop">
+            <h4>Doing</h4>
+            <div class="snapcontainer">
+                
             </div>
+            <div class="snapcontainer"></div>
+            <div class="snapcontainer"></div>
+            <div class="snapcontainer"></div>
+            <div class="snapcontainer"></div>
+        </div>
+        <div id="review" class="drop">
+            <h4>Review</h4>
+            <div class="snapcontainer"></div>
+            <div class="snapcontainer"></div>
+            <div class="snapcontainer"></div>
+            <div class="snapcontainer"></div>
+            <div class="snapcontainer"></div>
         </div>
         <div id="done" class="drop">
-            <div id="todo4" class="todo">
-        
+            <h4>Done</h4>
+            <div class="snapcontainer">
+                
             </div>
+            <div class="snapcontainer"></div>
+            <div class="snapcontainer"></div>
+            <div class="snapcontainer"></div>
+            <div class="snapcontainer"></div>
         </div>
     </div>
+    <script>
+        // // document.querySelector("form").addEventListener("submit", (e) => {
+        //     function getFormData(e) {
+        //         // const formData = $("form").serializeArray();
+        //         let data = e.formData;
+        //         for (value of data.values()) {
+        //             console.log(value);
+        //         }
+
+        //         // let data = e.formData;
+        //         // for (var value of data.values()) {
+        //         // console.log(value);
+        //         // }
+
+        //         // e.preventDefault();
+        //         return false;
+        //         // console.log(formData);
+        //     }
+    </script>
 </body>
 </html>
