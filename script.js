@@ -1,19 +1,52 @@
 $(() => {
   $( "#review" ).hide();
+  
   $("#showReview").click( () => {
     $("#review").toggle("show", "linear")
   });
 
-  function opendialog() {
-    $( ".todo" ).on("click", function(){
-    $(".dialog").dialog("close");
-    let dialog = $(this).data('id');
-    $( dialog ).dialog( "open" );
+  
+  
+
+  $( ".todo" ).on("mousedown", function(){
+    let dragged;
+    $(".todo").on("drag", () => {
+      dragged = true; 
+      console.log(dragged);
+    });
+    
+    if(!dragged){
+      $(".dialog").dialog("close");
+      let dialog = $(this).data('id');
+      $( dialog ).dialog( "open" );
+    }
+    dragged = false;
     // finns ingen bra lösning med typ children eller find?? slippa hårdkoda id och data-id
   });
-};
+  
+  
+  $( ".todo" ).draggable({snap: ".snapcontainer", snapMode: "inner"});
+  
+  
+  $( ".drop" ).droppable({
+      drop: function(){
+        // console.log($(this))
+        $(this).not("#backlog").effect("bounce", "slow");
+      }
+    });
+  $( ".dialog" ).dialog({
+    autoOpen: false
+  });
+  
+  $(".tabs").tabs();
+  $(".deadline").datepicker({
+    minDate: 0,
+    dateFormat: "yy-mm-dd"
+    });
+  $(".todo").append("<p>click or drag me</p>");
 
-opendialog();
+  
+     
 
 
   $("form").submit( function(event) {
@@ -29,7 +62,7 @@ opendialog();
           <div id="todo${todos +1}" class="todo" data-id="#dialog${todos +1}">
           <p>click or drag me</p>
               <div class="dialog" id="dialog${todos +1}">
-                  <div class="tabs">
+                  <div class="tabs" id="tabs${todos +1}">
                       <ul>
                           <li><a href="#fragment-1.${todos +1}">info 1</a></li>
                           <li><a href="#fragment-2.${todos +1}">info 2</a></li>
@@ -44,70 +77,31 @@ opendialog();
           </div>`
       $("#backlog").append( appendtodo );
       
-      // $(".deadline").datepicker({
-      //     minDate: 0,
-      //     dateFormat: "yy-mm-dd"
-      //     });
+      $(`#todo${todos +1} .deadline`).datepicker({
+          minDate: 0,
+          dateFormat: "yy-mm-dd"
+          });
           
       $(`#todo${todos +1} .deadline`).val(deadline);
       
       $( `#dialog${todos +1}` ).dialog({
         autoOpen: false
       });
-      opendialog();
+      
+      $( `#todo${todos +1}` ).on("click", function(){
+        
+        // if(){
+          $(".dialog").dialog("close");
+          let dialog = $(this).data('id');
+          $( dialog ).dialog( "open" );
+        // }
+        // finns ingen bra lösning med typ children eller find?? slippa hårdkoda id och data-id
+      });
+
+
+      $( `#todo${todos +1}` ).draggable({snap: ".snapcontainer", snapMode: "inner"});
+
+      $(`#tabs${todos +1}`).tabs();
+  
   });
-  $( ".todo" )
-    .draggable({snap: ".snapcontainer", snapMode: "inner"})
-    // why is this shit fucking up the draggable????            toggle class   css scale
-    /*.on("mousedown", function(){
-      $(this).effect("size", {
-        to: {width: 53, height: 53}})           
-    })
-    .on("mouseup", function(){
-      $(this).effect("size", {
-        to: {width: 50, height: 50}})
-    })*/
-    ;
-
-  $( ".drop" ).droppable({
-      drop: function(){
-        console.log($(this))
-          $(this).not("#backlog").effect("bounce", "slow");
-      }
-    });
-
-  $( ".dialog" ).dialog({
-    autoOpen: false
-  });
-
-  
-  $(".tabs").tabs();
-
-  $(".deadline").datepicker({
-    minDate: 0,
-    dateFormat: "yy-mm-dd"
-    });
-
-  $(".todo").append("<p>click or drag me</p>");
-  
-  // document.querySelector("form").addEventListener("submit", (e) => {
-  // // function getFormData() {
-  //   // const formData = $("form").serializeArray();
-  //   let data = e.formData;
-  //   for (value of data.values()){
-  //     console.log(value);
-  //   }
-
-  //   // let data = e.formData;
-  //   // for (var value of data.values()) {
-  //   // console.log(value);
-  //   // }
-
-  //   e.preventDefault();
-  //   return false;
-  //   // console.log(formData);
-  //   });
-  
-  
-  
 });
