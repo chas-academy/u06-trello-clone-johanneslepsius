@@ -5,14 +5,53 @@ $(() => {
     $("#review").toggle("show", "linear")
   });
 
-  
-  
+  $.widget("wowmuchcustom.annoy",{
+    options: {
+        value: Math.random() * 500,
+        value2: Math.random() * 100
+    },
+    _create: function() {
+        this.element.addClass( "annoying" );
+        this._on(this.element, {
+          mouseup: "_refresh"
+        });
+        },
+    _refresh: function(){
+      this.random();
+      this.element.css({
+        left: this.options.value,
+        bottom: this.options.value2
+      });
+    },
+    random: function(){
+      let position = {
+      value: Math.floor(Math.random() * 500),
+      value2: Math.floor(Math.random() * 100)
+      }
+      this.option(position)
+    },
+    _destroy: function(){
+      this.element.removeClass("annoying");
+    }
+  });
 
-  $( ".todo" ).on("mousedown", function(){
-    let dragged;
+  $("#annoyme").click( () => {
+    $(".todo").toggleClass("tobeannoyed");
+    // $(".tobeannoyed").on("mouseup", function(){
+      $(".tobeannoyed").annoy();
+      console.log($(".tobeannoyed").length);
+      if($(".tobeannoyed").length === 0){
+        $(".tobeannoyed").annoy("disable");
+      }
+    // });
+  });
+  
+  
+  
+  let dragged = true;
+  $( ".todo" ).on("click", function(){
     $(".todo").on("drag", () => {
       dragged = true; 
-      console.log(dragged);
     });
     
     if(!dragged){
@@ -21,7 +60,6 @@ $(() => {
       $( dialog ).dialog( "open" );
     }
     dragged = false;
-    // finns ingen bra lösning med typ children eller find?? slippa hårdkoda id och data-id
   });
   
   
@@ -30,23 +68,22 @@ $(() => {
   
   $( ".drop" ).droppable({
       drop: function(){
-        // console.log($(this))
         $(this).not("#backlog").effect("bounce", "slow");
       }
     });
+
   $( ".dialog" ).dialog({
     autoOpen: false
   });
   
   $(".tabs").tabs();
+
   $(".deadline").datepicker({
     minDate: 0,
     dateFormat: "yy-mm-dd"
     });
-  $(".todo").append("<p>click or drag me</p>");
 
-  
-     
+  $(".todo").append("<p>click or drag me</p>");
 
 
   $("form").submit( function(event) {
@@ -89,13 +126,16 @@ $(() => {
       });
       
       $( `#todo${todos +1}` ).on("click", function(){
-        
-        // if(){
-          $(".dialog").dialog("close");
-          let dialog = $(this).data('id');
-          $( dialog ).dialog( "open" );
-        // }
-        // finns ingen bra lösning med typ children eller find?? slippa hårdkoda id och data-id
+        $(`#todo${todos +1}`).on("drag", () => {
+        dragged = true; 
+        });
+    
+      if(!dragged){
+        $(".dialog").dialog("close");
+        let dialog = $(this).data('id');
+        $( dialog ).dialog( "open" );
+      }
+      dragged = false;
       });
 
 
