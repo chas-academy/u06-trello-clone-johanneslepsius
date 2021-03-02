@@ -1,9 +1,15 @@
+// first of all, this isn't exactly DRY-compliant code, since i had 
+// to do the same things with both hardcoded and dynamically created elements
+
 $(() => {
+  // choosing if you want to have a review board 
   $( "#review" ).hide();
-  
   $("#showReview").click( () => {
     $("#review").toggle("show", "linear")
   });
+
+  // this widget´s only purpose is to annoy the user. 
+  // when active, it puts the todo in a random place instead of where they drop it.
 
   $.widget("wowmuchcustom.annoy",{
     options: {
@@ -20,7 +26,7 @@ $(() => {
       this.random();
       this.element.css({
         left: this.options.value,
-        bottom: this.options.value2
+        top: this.options.value2
       });
     },
     random: function(){
@@ -29,13 +35,10 @@ $(() => {
       value2: Math.floor(Math.random() * 100)
       }
       this.option(position)
-    },
-    _destroy: function(){
-      console.log(this.element + "test");
-      this.element.removeClass( "annoying" );
-      this.element.css({left: "", bottom: ""});
     }
   });
+
+  // activating/deactivating the annoying widget
 
   const annoyme = document.querySelector("#annoyme");
 
@@ -48,6 +51,7 @@ $(() => {
     };
   });
   
+  // opening the todo dialog, but not after the user just moves it to a new place
   
   let dragged = true;
   $( ".todo" ).on("click", function(){
@@ -76,7 +80,7 @@ $(() => {
   $( ".dialog" ).dialog({
     autoOpen: false
   });
-  
+
   $(".tabs").tabs();
 
   $(".deadline").datepicker({
@@ -84,21 +88,22 @@ $(() => {
     dateFormat: "yy-mm-dd"
     });
 
+  // just me being too lazy to write text three times into the html
   $(".todo").append("<p>click or drag me</p>");
-
 
   $("form").submit( function(event) {
       event.preventDefault();
+      // keeping track of how many todos exist to keep the todo-parts related
       let todos = $(".todo");
       todos = todos.length;
       const info1 = $("input[name=info1]").val();
-      console.log(info1);
+      const title = info1.substring(0, 15);
       const info2 = $("input[name=info2]").val();
       const info3 = $("input[name=info3]").val();
       const deadline = $("input[name=deadline]").val();
       let appendtodo = `
           <div id="todo${todos +1}" class="todo" data-id="#dialog${todos +1}">
-          <p>click or drag me</p>
+          <p>${title + "..."}</p>
               <div class="dialog" id="dialog${todos +1}">
                   <div class="tabs" id="tabs${todos +1}">
                       <ul>
@@ -112,16 +117,20 @@ $(() => {
                   </div>
                   <p>Deadline:</p><input type="text" class="deadline"></input>
               </div>
-          </div>`
+          </div>`;
+
       $("#backlog").append( appendtodo );
       
       $(`#todo${todos +1} .deadline`).datepicker({
           minDate: 0,
           dateFormat: "yy-mm-dd"
           });
-          
+      
+      // setting the deadline
       $(`#todo${todos +1} .deadline`).val(deadline);
       
+      // totally DRY... *not*
+
       $( `#dialog${todos +1}` ).dialog({
         autoOpen: false
       });
