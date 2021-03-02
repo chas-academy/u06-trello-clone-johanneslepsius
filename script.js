@@ -31,21 +31,22 @@ $(() => {
       this.option(position)
     },
     _destroy: function(){
-      this.element.removeClass("annoying");
+      console.log(this.element + "test");
+      this.element.removeClass( "annoying" );
+      this.element.css({left: "", bottom: ""});
     }
   });
 
-  $("#annoyme").click( () => {
-    $(".todo").toggleClass("tobeannoyed");
-    // $(".tobeannoyed").on("mouseup", function(){
-      $(".tobeannoyed").annoy();
-      console.log($(".tobeannoyed").length);
-      if($(".tobeannoyed").length === 0){
-        $(".tobeannoyed").annoy("disable");
-      }
-    // });
+  const annoyme = document.querySelector("#annoyme");
+
+  $("#annoyme").on("click", () => {
+    if(annoyme.checked){
+      $(".todo").annoy();
+    } else if (!annoyme.checked){
+      $(".todo").annoy("destroy");
+      console.log($(".tobeannoyed"));
+    };
   });
-  
   
   
   let dragged = true;
