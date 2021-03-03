@@ -5,36 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="tailwind.css">
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
         crossorigin="anonymous" defer></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
         integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous" defer></script>
     <script src="script.js" defer></script>
 </head>
-<body>
-    <input type="checkbox" id="showReview">Show Review Board</input>
-    <input type="checkbox" id="annoyme">Annoy Me</input>
-    <form>
-        <label for="info 1">info 1</label>
-        <input type="text" name="info1">
-
-        <label for="info 2">info 2</label>
-        <input type="text" name="info2">
-
-        <label for="info 3">info 3</label>
-        <input type="text" name="info3">
-
-        <label for="deadline">deadline</label>
-        <input type="text" class="deadline" name="deadline">
-        
-        <button type="submit">Create</button>
+<body class="bg-blue-200">
+    <input class="rounded bg-indigo-500 font-bold mx-5" type="checkbox" id="showReview">Show Review Board</input>
+    <input class="rounded bg-indigo-500 font-bold mx-5" type="checkbox" id="annoyme">Annoy Me</input>
+    <form class="flex flex-wrap">
+        <div>
+        <label class="bg-indigo-100 rounded p-1 m-2"for="info 1">Info 1:</label>
+        <input class="rounded m-2"type="text" name="info1">
+        </div>
+        <div>
+        <label class="bg-indigo-100 rounded p-1 m-2"for="info 2">Info 2:</label>
+        <input class="rounded m-2"type="text" name="info2">
+        </div>
+        <div>
+        <label class="bg-indigo-100 rounded p-1 m-2"for="info 3">Info 3:</label>
+        <input class="rounded m-2"type="text" name="info3">
+        </div>
+        <div>
+        <label class="bg-indigo-100 rounded p-1 m-2"for="deadline">Deadline:</label>
+        <input class="rounded m-2" type="text" class="deadline" name="deadline">
+        </div>
+        <br>
+        <button class="bg-indigo-100 hover:bg-indigo-200 font-bold m-2 p-2 rounded"type="submit">Create</button>
     </form>
-    <div id="board">
-        <div id="backlog" class="drop">
-            <h4>Backlog</h4>
-            <div id="todo1" class="todo" data-id="#dialog1">
-                <div class="dialog" id="dialog1">
+    <div id="board" class="flex flex-row flex-wrap">
+        <div id="backlog" class="drop rounded bg-indigo-400 mx-2 mt-4 w-5/12 sm:w-1/5 md:w-1/6 2xl:w-1/12">
+            <h4 class="font-bold text-center">Backlog</h4>
+            <div id="todo1" class="todo rounded bg-white hover:bg-gray-100 my-5 mx-auto h-16 w-5/6" data-id="#dialog1">
+                <div class="dialog rounded bg-white" id="dialog1">
                     <div class="tabs">
                         <ul>
                             <li><a href="#fragment-1..">info 1</a></li>
@@ -45,12 +50,12 @@
                         <div id="fragment-2..">asdfasdfafdasdfmer blah</div>
                         <div id="fragment-3..">aasdfasdfsdfännu mer blah</div>
                     </div>
-                    <p>Deadline:<input type="text" class="deadline"></p>
+                    <p>Deadline:<input type="text" class="deadline bg-gray-200"></p>
                 </div>
             </div>
-            <div id="todo2" class="todo" data-id="#dialog2">
+            <div id="todo2" class="todo rounded bg-white hover:bg-gray-100 my-5 mx-auto h-16 w-5/6" data-id="#dialog2">
             
-                <div class="dialog" id="dialog2">
+                <div class="dialog rounded bg-white" id="dialog2">
                     <div class="tabs">
                         <ul>
                             <li><a href="#fragment-1.">info 1</a></li>
@@ -61,12 +66,12 @@
                         <div id="fragment-2.">asdfmer blah</div>
                         <div id="fragment-3.">sdfännu mer blah</div>
                     </div>
-                    <p>Deadline:<input type="text" class="deadline"></p>
+                    <p>Deadline:<input type="text" class="deadline bg-gray-200"></p>
                 </div>
             </div>
-            <div id="todo3" class="todo" data-id="#dialog3">
+            <div id="todo3" class="todo rounded bg-white hover:bg-gray-100 my-5 mx-auto h-16 w-5/6" data-id="#dialog3">
             
-                <div class="dialog" id="dialog3">
+                <div class="dialog rounded bg-white" id="dialog3">
                     <div class="tabs">
                         <ul>
                             <li><a href="#fragment-1">info 1</a></li>
@@ -77,67 +82,42 @@
                         <div id="fragment-2">mer blah</div>
                         <div id="fragment-3">ännu mer blah</div>
                     </div>
-                    <p>Deadline:<input type="text" class="deadline"></p>
+                    <p>Deadline:<input type="text" class="deadline bg-gray-200"></p>
                 </div>
             </div>
         </div>
-        <div id="todo" class="drop">
-            <h4>To Do</h4>
-            <div class="snapcontainer">
-                
-            </div>
-            <div class="snapcontainer"></div>
-            <div class="snapcontainer"></div>
-            <div class="snapcontainer"></div>
-            <div class="snapcontainer"></div>
+        <div id="todo" class="drop rounded bg-indigo-400 mx-2 mt-4 w-5/12 sm:w-1/5 md:w-1/6 2xl:w-1/12">
+            <h4 class="font-bold">To Do</h4>
+            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
+            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
+            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
+            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
+            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
         </div>
-        <div id="doing" class="drop">
-            <h4>Doing</h4>
-            <div class="snapcontainer">
-                
-            </div>
-            <div class="snapcontainer"></div>
-            <div class="snapcontainer"></div>
-            <div class="snapcontainer"></div>
-            <div class="snapcontainer"></div>
+        <div id="doing" class="drop rounded bg-indigo-400 mx-2 mt-4 w-5/12 sm:w-1/5 md:w-1/6 2xl:w-1/12">
+            <h4 class="font-bold">Doing</h4>
+            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
+            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
+            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
+            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
+            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
         </div>
-        <div id="review" class="drop">
-            <h4>Review</h4>
-            <div class="snapcontainer"></div>
-            <div class="snapcontainer"></div>
-            <div class="snapcontainer"></div>
-            <div class="snapcontainer"></div>
-            <div class="snapcontainer"></div>
+        <div id="review" class="drop rounded bg-indigo-400 mx-2 mt-4 w-5/12 sm:w-1/5 md:w-1/6 2xl:w-1/12">
+            <h4 class="font-bold">Review</h4>
+            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
+            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
+            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
+            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
+            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
         </div>
-        <div id="done" class="drop">
-            <h4>Done</h4>
-            <div class="snapcontainer">
-                
-            </div>
-            <div class="snapcontainer"></div>
-            <div class="snapcontainer"></div>
-            <div class="snapcontainer"></div>
-            <div class="snapcontainer"></div>
+        <div id="done" class="drop rounded bg-indigo-400 mx-2 mt-4 w-5/12 sm:w-1/5 md:w-1/6 2xl:w-1/12">
+            <h4 class="font-bold">Done</h4>
+            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
+            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
+            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
+            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
+            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
         </div>
     </div>
-    <script>
-        // // document.querySelector("form").addEventListener("submit", (e) => {
-        //     function getFormData(e) {
-        //         // const formData = $("form").serializeArray();
-        //         let data = e.formData;
-        //         for (value of data.values()) {
-        //             console.log(value);
-        //         }
-
-        //         // let data = e.formData;
-        //         // for (var value of data.values()) {
-        //         // console.log(value);
-        //         // }
-
-        //         // e.preventDefault();
-        //         return false;
-        //         // console.log(formData);
-        //     }
-    </script>
 </body>
 </html>

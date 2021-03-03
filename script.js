@@ -102,9 +102,9 @@ $(() => {
       const info3 = $("input[name=info3]").val();
       const deadline = $("input[name=deadline]").val();
       let appendtodo = `
-          <div id="todo${todos +1}" class="todo" data-id="#dialog${todos +1}">
+          <div id="todo${todos +1}" class="todo rounded bg-white hover:bg-gray-100 my-5 mx-auto w-28 h-16 w-5/6" data-id="#dialog${todos +1}">
           <p>${title + "..."}</p>
-              <div class="dialog" id="dialog${todos +1}">
+              <div class="dialog rounded bg-white" id="dialog${todos +1}">
                   <div class="tabs" id="tabs${todos +1}">
                       <ul>
                           <li><a href="#fragment-1.${todos +1}">info 1</a></li>
@@ -115,7 +115,7 @@ $(() => {
                       <div id="fragment-2.${todos +1}">${info2}</div>
                       <div id="fragment-3.${todos +1}">${info3}</div>
                   </div>
-                  <p>Deadline:</p><input type="text" class="deadline"></input>
+                  <p>Deadline:<input type="text" class="deadline bg-gray-200"></input></p>
               </div>
           </div>`;
 
