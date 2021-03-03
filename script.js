@@ -134,11 +134,12 @@ $(() => {
       $( `#dialog${todos +1}` ).dialog({
         autoOpen: false
       });
-      
-      $( `#todo${todos +1}` ).on("click", function(){
-        $(`#todo${todos +1}`).on("drag", () => {
+
+      dragged = true;
+      $( ".todo" ).on("click", function(){
+      $(".todo").on("drag", () => {
         dragged = true; 
-        });
+      });
     
       if(!dragged){
         $(".dialog").dialog("close");
