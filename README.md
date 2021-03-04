@@ -1,5 +1,7 @@
 # u06-trello-clone-johanneslepsius
 
+**this is in no way a trello clone, and was not meant to. it is simply the name of the assignment**
+
 The goal was to create a simple web app (to understand jQuery) with functionality to
 * drag and drop hardcoded cards between three or more columns (todo, doing, done)
 * choose if you want a review board
