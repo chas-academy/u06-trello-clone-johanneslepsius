@@ -15,7 +15,7 @@ $(() => {
   readlocal = function(){
     let amount = Object.keys(localStorage);
     // + 4 since there are 3 hardcoded todos and the while loop subtracts before executing
-    amount = amount.length + 4;
+    amount = amount.length + 5;
     let todo;
     while ( amount-- ){
       todo = localStorage.getItem(`todo${amount}`);
@@ -25,6 +25,11 @@ $(() => {
   };
   
   readlocal();
+
+  $(".delete").on("click", function(event) {
+          localStorage.removeItem($(this).data('id'));
+          location.reload();
+        });
 
   // this widget´s only purpose is to annoy the user. 
   // when active, it puts the todo in a random place instead of where they drop it.
@@ -135,6 +140,7 @@ $(() => {
                       <div id="fragment-3.${todos +1}">${info3}</div>
                   </div>
                   <p>Deadline:<input type="text" class="deadline bg-gray-200"></input></p>
+                  <button data-id="todo${todos +1}" class="delete bg-indigo-200">Delete</button>
               </div>
           </div>`;
 
@@ -172,10 +178,16 @@ $(() => {
       $( `#todo${todos +1}` ).draggable({snap: ".snapcontainer", snapMode: "inner"});
 
       $(`#tabs${todos +1}`).tabs();
-      
-      savelocally(appendtodo, todos);
-  
-  });
 
+      savelocally(appendtodo, todos);
+
+      // unbinding the previous event handler
+      $(".delete").off();
+
+      $(".delete").on("click", function() {
+          localStorage.removeItem($(this).data('id'));
+          location.reload();
+        });  
+  });
   
 });
