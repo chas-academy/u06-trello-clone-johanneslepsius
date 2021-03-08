@@ -1,4 +1,4 @@
-// first of all, this isn't exactly DRY-compliant code, since i had 
+// first of all, this code isn't exactly following DRY, since i had 
 // to do the same things with both hardcoded and dynamically created elements
 
 $(() => {
@@ -7,6 +7,24 @@ $(() => {
   $("#showReview").click( () => {
     $("#review").toggle("show", "linear")
   });
+
+  // just me being too lazy to write text three times into the html
+  $(".todo").append("<p>click or drag me</p>");
+
+  // reading locally stored todos
+  readlocal = function(){
+    let amount = Object.keys(localStorage);
+    // + 4 since there are 3 hardcoded todos and the while loop subtracts before executing
+    amount = amount.length + 4;
+    let todo;
+    while ( amount-- ){
+      todo = localStorage.getItem(`todo${amount}`);
+      // localStorage.removeItem(`todo${amount}`);
+      $("#backlog").append(todo);
+    }
+  };
+  
+  readlocal();
 
   // this widget´s only purpose is to annoy the user. 
   // when active, it puts the todo in a random place instead of where they drop it.
@@ -47,7 +65,6 @@ $(() => {
       $(".todo").annoy();
     } else if (!annoyme.checked){
       $(".todo").annoy("destroy");
-      console.log($(".tobeannoyed"));
     };
   });
   
@@ -88,12 +105,14 @@ $(() => {
     dateFormat: "yy-mm-dd"
     });
 
-  // just me being too lazy to write text three times into the html
-  $(".todo").append("<p>click or drag me</p>");
+  savelocally = function(todo, length){
+    localStorage.setItem(`todo${length + 1}`, todo);
+  };
+
 
   $("form").submit( function(event) {
       event.preventDefault();
-      // keeping track of how many todos exist to keep the todo-parts related
+      // keeping track of how many todos exist to keep the todo-tabs and dialogs related
       let todos = $(".todo");
       todos = todos.length;
       const info1 = $("input[name=info1]").val();
@@ -126,7 +145,7 @@ $(() => {
           dateFormat: "yy-mm-dd"
           });
       
-      // setting the deadline
+      // setting the user-defined deadline
       $(`#todo${todos +1} .deadline`).val(deadline);
       
       // totally DRY... *not*
@@ -153,6 +172,10 @@ $(() => {
       $( `#todo${todos +1}` ).draggable({snap: ".snapcontainer", snapMode: "inner"});
 
       $(`#tabs${todos +1}`).tabs();
+      
+      savelocally(appendtodo, todos);
   
   });
+
+  
 });
