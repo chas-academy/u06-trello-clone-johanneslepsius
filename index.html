@@ -5,20 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="tailwind.css">
+    <link rel="stylesheet" href="styles/tailwind.css">
+    <link rel="stylesheet" href="styles/style.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     
 </head>
 <body class="bg-gradient-to-tr from-indigo-400 via-purple-600 to-pink-300 bg-cover bg-no-repeat h-screen">
+
     <div class="flex">
         <div class="rounded bg-indigo-100 bg-opacity-25 m-2 p-2">
-            <input class="rounded bg-indigo-500 font-bold mx-2" type="checkbox" id="showReview">Show Review Board</input>
+            <input class="rounded bg-indigo-500 font-bold mx-2" type="checkbox" id="showReview" style="transform: scale(1.5);">Show Review Board</input>
         </div>
         <div class="rounded bg-indigo-100 bg-opacity-25 m-2 p-2">
-            <input class="rounded bg-indigo-500 font-bold mx-2" type="checkbox" id="annoyme">Annoy Me</input>
+            <input class="rounded bg-indigo-500 font-bold mx-2" type="checkbox" id="annoyme" style="transform: scale(1.5);">Annoy Me</input>
         </div>
+        
     </div>
-    <form class="grid grid-cols-6">
+
+    <div class="newtodo flex rounded bg-indigo-100 bg-opacity-25 m-2 p-2 w-36 hover:bg-opacity-75 cursor-pointer">
+            <img class="w-3" src="img/plus.svg">
+            <p class="ml-2">Add new task</p>
+    </div>
+
+    <form class="dialog grid grid-cols-6 bg-indigo-100 bg-opacity-75">
         <div class="col-span-3 bg-indigo-100 bg-opacity-25 rounded p-2 m-2">
         <label for="info 1">Info 1:</label>
         <input class="rounded"type="text" name="info1">
@@ -33,16 +42,18 @@
         </div>
         <div class="col-span-2 bg-indigo-100 bg-opacity-25 rounded p-2 m-2">
         <label for="deadline">Deadline:</label>
-        <input class="rounded w-3" type="text" class="deadline" name="deadline">
+        <input class="rounded w-20" type="text" class="deadline" name="deadline">
         </div>
         <button class="col-start-6 bg-indigo-100 bg-opacity-50 hover:bg-opacity-75 font-bold m-2 p-2 rounded"type="submit">Create</button>
     </form>
-    <div id="board" class="flex flex-row flex-nowrap h-1/2 sm:h-4/6 w-screen p-5 overflow-auto">
+
+    <div id="board" class="flex flex-row flex-nowrap p-5 overflow-auto" style="max-height: 80vh;">
         <kanban-card id="todo" title="To Do"></kanban-card>
         <kanban-card id="doing" title="Doing"></kanban-card>
         <kanban-card id="review" title="Under Review"></kanban-card>
         <kanban-card id="done" title="Done"></kanban-card>
     </div>
+
     <script src="components.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
         crossorigin="anonymous"></script>

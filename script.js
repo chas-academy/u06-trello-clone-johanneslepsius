@@ -72,8 +72,11 @@ $(() => {
   });
   
   // opening the todo dialog, but not after the user just moves it to a new place
-  
-  let dragged = true;
+  $( ".dialog" ).dialog({
+    autoOpen: false
+  });
+
+  let dragged = false;
   $( ".todo" ).on("click", function(){
     $(".todo").on("drag", () => {
       dragged = true; 
@@ -87,6 +90,10 @@ $(() => {
     dragged = false;
   });
 
+  $(".newtodo").on("click", function(){
+    $("form").dialog("open");
+  });
+
   $(".sortable").sortable({
     connectWith: ".sortable",
     receive: function(){
@@ -94,9 +101,7 @@ $(() => {
     }
   });
 
-  $( ".dialog" ).dialog({
-    autoOpen: false
-  });
+  
 
   $(".tabs").tabs();
 
