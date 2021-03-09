@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,30 +8,35 @@
     <title>Document</title>
     <link rel="stylesheet" href="tailwind.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous" defer></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+        integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous" defer></script>
+    <script src="script.js" defer></script>
 </head>
+
 <body class="bg-gradient-to-tr from-indigo-400 via-purple-600 to-pink-300 bg-cover bg-no-repeat h-screen">
     <input class="rounded bg-indigo-500 font-bold mx-2" type="checkbox" id="showReview">Show Review Board</input>
     <input class="rounded bg-indigo-500 font-bold mx-2" type="checkbox" id="annoyme">Annoy Me</input>
     <form class="flex flex-wrap">
         <div>
-        <label class="bg-indigo-100 rounded p-1 m-2"for="info 1">Info 1:</label>
-        <input class="rounded m-2"type="text" name="info1">
+            <label class="bg-indigo-100 rounded p-1 m-2" for="info 1">Info 1:</label>
+            <input class="rounded m-2" type="text" name="info1">
         </div>
         <div>
-        <label class="bg-indigo-100 rounded p-1 m-2"for="info 2">Info 2:</label>
-        <input class="rounded m-2"type="text" name="info2">
+            <label class="bg-indigo-100 rounded p-1 m-2" for="info 2">Info 2:</label>
+            <input class="rounded m-2" type="text" name="info2">
         </div>
         <div>
-        <label class="bg-indigo-100 rounded p-1 m-2"for="info 3">Info 3:</label>
-        <input class="rounded m-2"type="text" name="info3">
+            <label class="bg-indigo-100 rounded p-1 m-2" for="info 3">Info 3:</label>
+            <input class="rounded m-2" type="text" name="info3">
         </div>
         <div>
-        <label class="bg-indigo-100 rounded p-1 m-2"for="deadline">Deadline:</label>
-        <input class="rounded m-2" type="text" class="deadline" name="deadline">
+            <label class="bg-indigo-100 rounded p-1 m-2" for="deadline">Deadline:</label>
+            <input class="rounded m-2" type="text" class="deadline" name="deadline">
         </div>
         <br>
-        <button class="bg-indigo-100 hover:bg-indigo-200 font-bold m-2 p-2 rounded"type="submit">Create</button>
+        <button class="bg-indigo-100 hover:bg-indigo-200 font-bold m-2 p-2 rounded" type="submit">Create</button>
     </form>
     <div id="board" class="flex flex-row flex-wrap">
         <div id="cardcontainer" class="w-5/12 sm:w-1/5 md:w-1/6 2xl:w-1/12">
@@ -56,7 +62,7 @@
                 </div>
             </div>
             <div id="todo2" class="todo rounded bg-white hover:bg-gray-100 my-5 mx-auto h-16 w-5/6" data-id="#dialog2">
-            
+
                 <div class="dialog rounded bg-white" id="dialog2">
                     <div class="tabs">
                         <ul>
@@ -72,7 +78,7 @@
                 </div>
             </div>
             <div id="todo3" class="todo rounded bg-white hover:bg-gray-100 my-5 mx-auto h-16 w-5/6" data-id="#dialog3">
-            
+
                 <div class="dialog rounded bg-white" id="dialog3">
                     <div class="tabs">
                         <ul>
@@ -122,10 +128,6 @@
         </div>
     </div>
     <script src="components.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-        crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
-        integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
 </body>
+
 </html>
