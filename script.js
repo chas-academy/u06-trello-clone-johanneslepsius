@@ -1,5 +1,5 @@
 // first of all, this code isn't exactly following DRY, since i had 
-// to do the same things with both hardcoded and dynamically created elements
+// to do the same things with both loaded and dynamically created elements
 
 $(() => {
   // choosing if you want to have a review board 
@@ -7,9 +7,6 @@ $(() => {
   $("#showReview").click( () => {
     $("#review").toggle("show", "linear")
   });
-
-  // just me being too lazy to write text three times into the html
-  $(".todo").append("<p>click or drag me</p>");
 
   // reading locally stored todos
   readlocal = function(){
@@ -20,13 +17,13 @@ $(() => {
     while ( amount-- ){
       todo = localStorage.getItem(`todo${amount}`);
       // localStorage.removeItem(`todo${amount}`);
-      $("#todo").append(todo);
+      $("#todo .sortable").append(todo);
     }
   };
   
   readlocal();
 
-  $(".delete").on("click", function(event) {
+  $(".delete").on("click", function() {
           localStorage.removeItem($(this).data('id'));
           location.reload();
         });
@@ -51,6 +48,7 @@ $(() => {
         left: this.options.value,
         top: this.options.value2
       });
+      $(this).closest("ul").addClass("bg-red-100");
     },
     random: function(){
       let position = {
@@ -88,18 +86,13 @@ $(() => {
     }
     dragged = false;
   });
-  
-  
-  // $( ".todo" ).draggable({snap: ".snapcontainer", snapMode: "inner"});
-  // 
-  // 
-  // $( ".drop" ).droppable({
-      // drop: function(){
-        // $(this).not("#backlog").effect("bounce", "slow");
-      // }
-    // });
 
-  $(".drop").sortable();
+  $(".sortable").sortable({
+    connectWith: ".sortable",
+    receive: function(){
+      $(this).closest(".drop").effect("bounce", "slow");
+    }
+  });
 
   $( ".dialog" ).dialog({
     autoOpen: false
@@ -128,7 +121,7 @@ $(() => {
       const info3 = $("input[name=info3]").val();
       const deadline = $("input[name=deadline]").val();
       let appendtodo = `
-          <div id="todo${todos +1}" class="todo rounded bg-white hover:bg-gray-100 my-5 mx-auto w-28 h-16 w-5/6" data-id="#dialog${todos +1}">
+          <li id="todo${todos +1}" class="todo shadow rounded bg-white hover:bg-gray-100 my-1 p-2" data-id="#dialog${todos +1}">
           <p>${title + "..."}</p>
               <div class="dialog rounded bg-white" id="dialog${todos +1}">
                   <div class="tabs" id="tabs${todos +1}">
@@ -144,9 +137,9 @@ $(() => {
                   <p>Deadline:<input type="text" class="deadline bg-gray-200"></input></p>
                   <button data-id="todo${todos +1}" class="delete bg-indigo-200">Delete</button>
               </div>
-          </div>`;
+          </li>`;
 
-      $("#todo").append( appendtodo );
+      $("#todo .sortable").append( appendtodo );
       
       $(`#todo${todos +1} .deadline`).datepicker({
           minDate: 0,
@@ -177,7 +170,7 @@ $(() => {
       });
 
 
-      $( `#todo${todos +1}` ).draggable({snap: ".snapcontainer", snapMode: "inner"});
+      // $( `#todo${todos +1}` ).draggable({snap: ".snapcontainer", snapMode: "inner"});
 
       $(`#tabs${todos +1}`).tabs();
 

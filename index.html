@@ -10,29 +10,34 @@
     
 </head>
 <body class="bg-gradient-to-tr from-indigo-400 via-purple-600 to-pink-300 bg-cover bg-no-repeat h-screen">
-    <input class="rounded bg-indigo-500 font-bold mx-2" type="checkbox" id="showReview">Show Review Board</input>
-    <input class="rounded bg-indigo-500 font-bold mx-2" type="checkbox" id="annoyme">Annoy Me</input>
-    <form class="flex flex-wrap">
-        <div>
-        <label class="bg-indigo-100 rounded p-1 m-2"for="info 1">Info 1:</label>
-        <input class="rounded m-2"type="text" name="info1">
+    <div class="flex">
+        <div class="rounded bg-indigo-100 bg-opacity-25 m-2 p-2">
+            <input class="rounded bg-indigo-500 font-bold mx-2" type="checkbox" id="showReview">Show Review Board</input>
         </div>
-        <div>
-        <label class="bg-indigo-100 rounded p-1 m-2"for="info 2">Info 2:</label>
-        <input class="rounded m-2"type="text" name="info2">
+        <div class="rounded bg-indigo-100 bg-opacity-25 m-2 p-2">
+            <input class="rounded bg-indigo-500 font-bold mx-2" type="checkbox" id="annoyme">Annoy Me</input>
         </div>
-        <div>
-        <label class="bg-indigo-100 rounded p-1 m-2"for="info 3">Info 3:</label>
-        <input class="rounded m-2"type="text" name="info3">
+    </div>
+    <form class="grid grid-cols-6">
+        <div class="col-span-3 bg-indigo-100 bg-opacity-25 rounded p-2 m-2">
+        <label for="info 1">Info 1:</label>
+        <input class="rounded"type="text" name="info1">
         </div>
-        <div>
-        <label class="bg-indigo-100 rounded p-1 m-2"for="deadline">Deadline:</label>
-        <input class="rounded m-2" type="text" class="deadline" name="deadline">
+        <div class="col-span-3 bg-indigo-100 bg-opacity-25 rounded p-2 m-2">
+        <label for="info 2">Info 2:</label>
+        <input class="rounded"type="text" name="info2">
         </div>
-        <br>
-        <button class="bg-indigo-100 hover:bg-indigo-200 font-bold m-2 p-2 rounded"type="submit">Create</button>
+        <div class="col-span-2 bg-indigo-100 bg-opacity-25 rounded p-2 m-2">
+        <label for="info 3">Info 3:</label>
+        <input class="rounded"type="text" name="info3">
+        </div>
+        <div class="col-span-2 bg-indigo-100 bg-opacity-25 rounded p-2 m-2">
+        <label for="deadline">Deadline:</label>
+        <input class="rounded w-3" type="text" class="deadline" name="deadline">
+        </div>
+        <button class="col-start-6 bg-indigo-100 bg-opacity-50 hover:bg-opacity-75 font-bold m-2 p-2 rounded"type="submit">Create</button>
     </form>
-    <div id="board" class="flex flex-row flex-wrap">
+    <div id="board" class="flex flex-row flex-nowrap h-1/2 sm:h-4/6 w-screen p-5 overflow-auto">
         <kanban-card id="todo" title="To Do"></kanban-card>
         <kanban-card id="doing" title="Doing"></kanban-card>
         <kanban-card id="review" title="Under Review"></kanban-card>
