@@ -20,7 +20,7 @@ $(() => {
     while ( amount-- ){
       todo = localStorage.getItem(`todo${amount}`);
       // localStorage.removeItem(`todo${amount}`);
-      $("#backlog").append(todo);
+      $("#todo").append(todo);
     }
   };
   
@@ -90,14 +90,16 @@ $(() => {
   });
   
   
-  $( ".todo" ).draggable({snap: ".snapcontainer", snapMode: "inner"});
-  
-  
-  $( ".drop" ).droppable({
-      drop: function(){
-        $(this).not("#backlog").effect("bounce", "slow");
-      }
-    });
+  // $( ".todo" ).draggable({snap: ".snapcontainer", snapMode: "inner"});
+  // 
+  // 
+  // $( ".drop" ).droppable({
+      // drop: function(){
+        // $(this).not("#backlog").effect("bounce", "slow");
+      // }
+    // });
+
+  $(".drop").sortable();
 
   $( ".dialog" ).dialog({
     autoOpen: false
@@ -144,7 +146,7 @@ $(() => {
               </div>
           </div>`;
 
-      $("#backlog").append( appendtodo );
+      $("#todo").append( appendtodo );
       
       $(`#todo${todos +1} .deadline`).datepicker({
           minDate: 0,

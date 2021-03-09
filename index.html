@@ -33,93 +33,10 @@
         <button class="bg-indigo-100 hover:bg-indigo-200 font-bold m-2 p-2 rounded"type="submit">Create</button>
     </form>
     <div id="board" class="flex flex-row flex-wrap">
-        <div id="cardcontainer" class="w-5/12 sm:w-1/5 md:w-1/6 2xl:w-1/12">
-            <kanban-card>
-                <h4 class="font-bold text-center">Backlog</h4>
-            </kanban-card>
-        </div>
-        <div id="backlog" class="drop rounded bg-indigo-400 mx-2 mt-4 w-5/12 sm:w-1/5 md:w-1/6 2xl:w-1/12">
-            <h4 class="font-bold text-center">Backlog</h4>
-            <div id="todo1" class="todo rounded bg-white hover:bg-gray-100 my-5 mx-auto h-16 w-5/6" data-id="#dialog1">
-                <div class="dialog rounded bg-white" id="dialog1">
-                    <div class="tabs">
-                        <ul>
-                            <li><a href="#fragment-1..">info 1</a></li>
-                            <li><a href="#fragment-2..">info 2</a></li>
-                            <li><a href="#fragment-3..">info 3</a></li>
-                        </ul>
-                        <div id="fragment-1..">zsdfsdafasfdsdfblah</div>
-                        <div id="fragment-2..">asdfasdfafdasdfmer blah</div>
-                        <div id="fragment-3..">aasdfasdfsdfännu mer blah</div>
-                    </div>
-                    <p>Deadline:<input type="text" class="deadline bg-gray-200"></p>
-                </div>
-            </div>
-            <div id="todo2" class="todo rounded bg-white hover:bg-gray-100 my-5 mx-auto h-16 w-5/6" data-id="#dialog2">
-            
-                <div class="dialog rounded bg-white" id="dialog2">
-                    <div class="tabs">
-                        <ul>
-                            <li><a href="#fragment-1.">info 1</a></li>
-                            <li><a href="#fragment-2.">info 2</a></li>
-                            <li><a href="#fragment-3.">info 3</a></li>
-                        </ul>
-                        <div id="fragment-1.">sdfblah</div>
-                        <div id="fragment-2.">asdfmer blah</div>
-                        <div id="fragment-3.">sdfännu mer blah</div>
-                    </div>
-                    <p>Deadline:<input type="text" class="deadline bg-gray-200"></p>
-                </div>
-            </div>
-            <div id="todo3" class="todo rounded bg-white hover:bg-gray-100 my-5 mx-auto h-16 w-5/6" data-id="#dialog3">
-            
-                <div class="dialog rounded bg-white" id="dialog3">
-                    <div class="tabs">
-                        <ul>
-                            <li><a href="#fragment-1">info 1</a></li>
-                            <li><a href="#fragment-2">info 2</a></li>
-                            <li><a href="#fragment-3">info 3</a></li>
-                        </ul>
-                        <div id="fragment-1">blah</div>
-                        <div id="fragment-2">mer blah</div>
-                        <div id="fragment-3">ännu mer blah</div>
-                    </div>
-                    <p>Deadline:<input type="text" class="deadline bg-gray-200"></p>
-                </div>
-            </div>
-        </div>
-        <div id="todo" class="drop rounded bg-indigo-400 mx-2 mt-4 w-5/12 sm:w-1/5 md:w-1/6 2xl:w-1/12">
-            <h4 class="font-bold text-center">To Do</h4>
-            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
-            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
-            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
-            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
-            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
-        </div>
-        <div id="doing" class="drop rounded bg-indigo-400 mx-2 mt-4 w-5/12 sm:w-1/5 md:w-1/6 2xl:w-1/12">
-            <h4 class="font-bold text-center">Doing</h4>
-            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
-            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
-            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
-            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
-            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
-        </div>
-        <div id="review" class="drop rounded bg-indigo-400 mx-2 mt-4 w-5/12 sm:w-1/5 md:w-1/6 2xl:w-1/12">
-            <h4 class="font-bold text-center">Review</h4>
-            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
-            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
-            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
-            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
-            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
-        </div>
-        <div id="done" class="drop rounded bg-indigo-400 mx-2 mt-4 w-5/12 sm:w-1/5 md:w-1/6 2xl:w-1/12">
-            <h4 class="font-bold text-center">Done</h4>
-            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
-            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
-            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
-            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
-            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
-        </div>
+        <kanban-card id="todo" title="To Do"></kanban-card>
+        <kanban-card id="doing" title="Doing"></kanban-card>
+        <kanban-card id="review" title="Under Review"></kanban-card>
+        <kanban-card id="done" title="Done"></kanban-card>
     </div>
     <script src="components.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="

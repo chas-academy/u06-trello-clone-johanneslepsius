@@ -1,14 +1,18 @@
 Vue.component('kanban-card', {
-    template: `<div id="todo" class="drop rounded bg-indigo-400 mx-2 mt-4">
-            <h4 class="font-bold text-center">To Do</h4>
-            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
-            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
-            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
-            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
-            <div class="snapcontainer bg-indigo-100 h-6 w-5/6 h-16 rounded my-5 mx-auto"></div>
-        </div>`
+    props: ['title'],
+    template: `<div class="drop rounded bg-gray-200 mx-2 mt-4 w-5/12 sm:w-1/5 md:w-1/6 2xl:w-1/12 overflow-x-auto">
+            <h4 class="font-bold text-center">{{title}}</h4>
+            </div>`
 });
 
-let cardcontainer = new Vue({
-    el: '#cardcontainer'
+let board = new Vue({
+    el: '#board'
+    // data: {
+    //     cards: [
+    //         {id: 'todo', title: 'To Do'},
+    //         {id: 'doing', title: 'Doing'},
+    //         {id: 'review', title: 'Review'},
+    //         {id: 'Done', title: 'Done'},
+    //     ]
+    // }
 });
