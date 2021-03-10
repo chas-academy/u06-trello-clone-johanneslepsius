@@ -16,6 +16,11 @@ input[type="checkbox"] {
   transform: scale(1.5);
 }
 
-#board {
-  max-height: 70vh;
+.drop {
+  min-height: 70px;
+  max-height: 60vh;
+}
+
+.sortable {
+  min-height: 40px;
 }

@@ -2,26 +2,30 @@
 // to do the same things with both loaded and dynamically created elements
 
 $(() => {
+  // localStorage.clear();
   // choosing if you want to have a review board 
   $( "#review" ).hide();
   $("#showReview").click( () => {
     $("#review").toggle("show", "linear")
   });
 
+  // a unique id-creator
+  if(!localStorage.getItem("counter")){
+    localStorage.setItem("counter", 1)
+  };
+
   // reading locally stored todos
-  readlocal = function(){
-    let amount = Object.keys(localStorage);
-    // + 4 since there are 3 hardcoded todos and the while loop subtracts before executing
-    amount = amount.length + 5;
-    let todo;
-    while ( amount-- ){
-      todo = localStorage.getItem(`todo${amount}`);
-      // localStorage.removeItem(`todo${amount}`);
+  if (Object.keys(localStorage)){
+    let index = Object.keys(localStorage);
+    index = index.length;
+    do {
+      const todo = localStorage.getItem(`todo${index}`);
+      const deadline = localStorage.getItem(`date${index}`);
       $("#todo .sortable").append(todo);
-    }
+      $(`todo${index} .deadline`).val(deadline);
+    } while ( index-- );
   };
   
-  readlocal();
 
   $(".delete").on("click", function() {
           $(".dialog").dialog("close");
@@ -31,7 +35,8 @@ $(() => {
         });
 
   // this widget´s only purpose is to annoy the user. 
-  // when active, it puts the todo in a random place instead of where they drop it.
+  // when active, it puts the todo in random places instead of following the cursor. 
+  // Why, you ask? For the glory of learning of course!
 
   $.widget("wowmuchcustom.annoy",{
     options: {
@@ -71,11 +76,6 @@ $(() => {
       $(".todo").annoy("destroy");
     };
   });
-
-  // $( ".sortable" ).on( "sortstop", function( event, ui ) {
-    // alert("boo");
-  // } );
-  // $("#test").annoy();
   
   // opening the todo dialog, but not after the user just moves it to a new place
   $( ".dialog" ).dialog({
@@ -121,16 +121,22 @@ $(() => {
     dateFormat: "yy-mm-dd"
     });
 
-  savelocally = function(todo, length){
-    localStorage.setItem(`todo${length + 1}`, todo);
+  savelocally = function(todo, num, deadline){
+    console.log(num);
+    localStorage.setItem("date"+num, deadline)
+    localStorage.setItem("todo"+num, todo);
+    num++;
+    localStorage.setItem("counter", num);
   };
 
 
   $("form").submit( function(event) {
       event.preventDefault();
+      $(".dialog").dialog("close");
       // keeping track of how many todos exist to keep the todo-tabs and dialogs related
-      let todos = $(".todo");
-      todos = todos.length;
+      // let todos = $(".todo");
+      // todos = todos.length;
+      let num = localStorage.getItem("counter");
       const info1 = $("input[name=info1]").val();
       const title = info1.substring(0, 15);
       const info2 = $("input[name=info2]").val();
@@ -138,41 +144,41 @@ $(() => {
       const deadline = $("input[name=deadline]").val();
       const predeadline = deadline.substring(5);
       let appendtodo = `
-          <li id="todo${todos +1}" class="todo shadow rounded bg-white hover:bg-gray-100 my-2 p-2" data-id="#dialog${todos +1}">
+          <li id="todo${num}" class="todo shadow rounded bg-white hover:bg-gray-100 my-2 p-2" data-id="#dialog${num}">
           <p>${title + "..."}</p>
           <div class="flex my-2">
           <img src="img/clock.svg" class="w-4 mr-2">
             <p>${predeadline}</p>
           </div>
-              <div class="dialog rounded bg-white p-2" id="dialog${todos +1}">
-                  <div class="tabs" id="tabs${todos +1}">
+              <div class="dialog rounded bg-white p-2" id="dialog${num}">
+                  <div class="tabs" id="tabs${num}">
                       <ul>
-                          <li><a href="#fragment-1.${todos +1}">Info 1</a></li>
-                          <li><a href="#fragment-2.${todos +1}">Info 2</a></li>
-                          <li><a href="#fragment-3.${todos +1}">Info 3</a></li>
+                          <li><a href="#fragment-1.${num}">Info 1</a></li>
+                          <li><a href="#fragment-2.${num}">Info 2</a></li>
+                          <li><a href="#fragment-3.${num}">Info 3</a></li>
                       </ul>
-                      <div id="fragment-1.${todos +1}">${info1}</div>
-                      <div id="fragment-2.${todos +1}">${info2}</div>
-                      <div id="fragment-3.${todos +1}">${info3}</div>
+                      <div id="fragment-1.${num}">${info1}</div>
+                      <div id="fragment-2.${num}">${info2}</div>
+                      <div id="fragment-3.${num}">${info3}</div>
                   </div>
                   <p>Deadline:<input type="text" class="deadline bg-gray-200"></input></p>
-                  <button data-id="todo${todos +1}" class="delete bg-indigo-200 hover:bg-indigo-300 my-2 px-2 rounded">Delete</button>
+                  <button data-id="todo${num}" class="delete bg-indigo-200 hover:bg-indigo-300 my-2 px-2 rounded">Delete</button>
               </div>
           </li>`;
 
       $("#todo .sortable").append( appendtodo );
       
-      $(`#todo${todos +1} .deadline`).datepicker({
+      $(`#todo${num} .deadline`).datepicker({
           minDate: 0,
           dateFormat: "yy-mm-dd"
           });
       
       // setting the user-defined deadline
-      $(`#todo${todos +1} .deadline`).val(deadline);
+      $(`#todo${num} .deadline`).val(deadline);
       
       // totally DRY... *not*
 
-      $( `#dialog${todos +1}` ).dialog({
+      $( `#dialog${num}` ).dialog({
         autoOpen: false
       });
 
@@ -190,9 +196,9 @@ $(() => {
       dragged = false;
       });
 
-      $(`#tabs${todos +1}`).tabs();
+      $(`#tabs${num}`).tabs();
 
-      savelocally(appendtodo, todos);
+      savelocally(appendtodo, num, deadline);
 
       // unbinding the previous event handler
       $(".delete").off();
