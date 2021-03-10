@@ -24,6 +24,7 @@ $(() => {
   readlocal();
 
   $(".delete").on("click", function() {
+          $(".dialog").dialog("close");
           const todo = $(this).data('id')
           localStorage.removeItem(todo);
           $(`#${todo}`).remove();
@@ -34,35 +35,26 @@ $(() => {
 
   $.widget("wowmuchcustom.annoy",{
     options: {
-        value: Math.random() * 500,
-        value2: Math.random() * 100
+        value: Math.floor(Math.random() * 500),
+        value2: Math.floor(Math.random() * 500)
     },
     _create: function() {
         this.element.addClass( "annoying" );
-        // unbind:a sortable off()
-        // this._off(this.element);
-        
-        this._on(this.element, {
-          mouseup: "_refresh"
+        this._on(".sortable", {
+          sort: "_refresh"
         });
         },
     _refresh: function(){
       this.random();
-      console.log(this);
-      $(".sortable").sortable("destroy");
-      $(".sortable").sortable({
-        items: `li:not(${this.element})`
-      });
       this.element.css({
-        left: this.options.value,
-        top: this.options.value2
+        top: this.options.value,
+        left: this.options.value2
       });
-      // $(this).closest("ul").addClass("bg-red-100");
     },
     random: function(){
       let position = {
       value: Math.floor(Math.random() * 500),
-      value2: Math.floor(Math.random() * 100)
+      value2: Math.floor(Math.random() * 500)
       }
       this.option(position)
     }
@@ -80,9 +72,9 @@ $(() => {
     };
   });
 
-  $( ".sortable" ).on( "sortstop", function( event, ui ) {
-    alert("boo");
-  } );
+  // $( ".sortable" ).on( "sortstop", function( event, ui ) {
+    // alert("boo");
+  // } );
   // $("#test").annoy();
   
   // opening the todo dialog, but not after the user just moves it to a new place
@@ -206,9 +198,11 @@ $(() => {
       $(".delete").off();
 
       $(".delete").on("click", function() {
-          localStorage.removeItem($(this).data('id'));
-          location.reload();
-        });  
+          $(".dialog").dialog("close");
+          const todo = $(this).data('id')
+          localStorage.removeItem(todo);
+          $(`#${todo}`).remove();
+        }); 
   });
   
 });
