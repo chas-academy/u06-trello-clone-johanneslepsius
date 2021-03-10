@@ -24,8 +24,9 @@ $(() => {
   readlocal();
 
   $(".delete").on("click", function() {
-          localStorage.removeItem($(this).data('id'));
-          location.reload();
+          const todo = $(this).data('id')
+          localStorage.removeItem(todo);
+          $(`#${todo}`).remove();
         });
 
   // this widget´s only purpose is to annoy the user. 
@@ -38,17 +39,25 @@ $(() => {
     },
     _create: function() {
         this.element.addClass( "annoying" );
+        // unbind:a sortable off()
+        // this._off(this.element);
+        
         this._on(this.element, {
           mouseup: "_refresh"
         });
         },
     _refresh: function(){
       this.random();
+      console.log(this);
+      $(".sortable").sortable("destroy");
+      $(".sortable").sortable({
+        items: `li:not(${this.element})`
+      });
       this.element.css({
         left: this.options.value,
         top: this.options.value2
       });
-      $(this).closest("ul").addClass("bg-red-100");
+      // $(this).closest("ul").addClass("bg-red-100");
     },
     random: function(){
       let position = {
@@ -70,6 +79,11 @@ $(() => {
       $(".todo").annoy("destroy");
     };
   });
+
+  $( ".sortable" ).on( "sortstop", function( event, ui ) {
+    alert("boo");
+  } );
+  // $("#test").annoy();
   
   // opening the todo dialog, but not after the user just moves it to a new place
   $( ".dialog" ).dialog({
@@ -91,7 +105,12 @@ $(() => {
   });
 
   $(".newtodo").on("click", function(){
+    $(".dialog").dialog("close");
     $("form").dialog("open");
+    $("form .deadline").datepicker({
+    minDate: 0,
+    dateFormat: "yy-mm-dd"
+    });
   });
 
   $(".sortable").sortable({
@@ -125,22 +144,27 @@ $(() => {
       const info2 = $("input[name=info2]").val();
       const info3 = $("input[name=info3]").val();
       const deadline = $("input[name=deadline]").val();
+      const predeadline = deadline.substring(5);
       let appendtodo = `
-          <li id="todo${todos +1}" class="todo shadow rounded bg-white hover:bg-gray-100 my-1 p-2" data-id="#dialog${todos +1}">
+          <li id="todo${todos +1}" class="todo shadow rounded bg-white hover:bg-gray-100 my-2 p-2" data-id="#dialog${todos +1}">
           <p>${title + "..."}</p>
-              <div class="dialog rounded bg-white" id="dialog${todos +1}">
+          <div class="flex my-2">
+          <img src="img/clock.svg" class="w-4 mr-2">
+            <p>${predeadline}</p>
+          </div>
+              <div class="dialog rounded bg-white p-2" id="dialog${todos +1}">
                   <div class="tabs" id="tabs${todos +1}">
                       <ul>
-                          <li><a href="#fragment-1.${todos +1}">info 1</a></li>
-                          <li><a href="#fragment-2.${todos +1}">info 2</a></li>
-                          <li><a href="#fragment-3.${todos +1}">info 3</a></li>
+                          <li><a href="#fragment-1.${todos +1}">Info 1</a></li>
+                          <li><a href="#fragment-2.${todos +1}">Info 2</a></li>
+                          <li><a href="#fragment-3.${todos +1}">Info 3</a></li>
                       </ul>
                       <div id="fragment-1.${todos +1}">${info1}</div>
                       <div id="fragment-2.${todos +1}">${info2}</div>
                       <div id="fragment-3.${todos +1}">${info3}</div>
                   </div>
                   <p>Deadline:<input type="text" class="deadline bg-gray-200"></input></p>
-                  <button data-id="todo${todos +1}" class="delete bg-indigo-200">Delete</button>
+                  <button data-id="todo${todos +1}" class="delete bg-indigo-200 hover:bg-indigo-300 my-2 px-2 rounded">Delete</button>
               </div>
           </li>`;
 
@@ -173,9 +197,6 @@ $(() => {
       }
       dragged = false;
       });
-
-
-      // $( `#todo${todos +1}` ).draggable({snap: ".snapcontainer", snapMode: "inner"});
 
       $(`#tabs${todos +1}`).tabs();
 

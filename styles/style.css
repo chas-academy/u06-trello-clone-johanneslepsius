@@ -1,0 +1,21 @@
+.ui-dialog-titlebar-close {
+  font-weight: bold;
+  background-color: #c7d2fe;
+  border-radius: 0.25rem;
+  padding: 0.25rem;
+}
+.ui-dialog-titlebar-close:hover {
+  background-color: #a5b4fc;
+}
+
+.todo {
+  overflow-wrap: break-word;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.5);
+}
+
+#board {
+  max-height: 70vh;
+}
