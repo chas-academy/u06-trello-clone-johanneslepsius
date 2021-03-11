@@ -9,20 +9,33 @@ $(() => {
     $("#review").toggle("show", "linear")
   });
 
-  // a unique id-creator
+  // todo-objekt!!
+  // counter is a unique id-creator
   if(!localStorage.getItem("counter")){
-    localStorage.setItem("counter", 1)
+    localStorage.setItem("counter", "1");
+  } else {
+    // todoarray = JSON.parse(localStorage.getItem("todos"));
+    // datesarray = JSON.parse(localStorage.getItem("todos"));
   };
 
   // reading locally stored todos
   if (Object.keys(localStorage)){
-    let index = Object.keys(localStorage);
-    index = index.length;
+    // let index = Object.keys(localStorage);
+    // index = index.length;
+    let index = localStorage.getItem("counter");
+    console.log(index);
     do {
-      const todo = localStorage.getItem(`todo${index}`);
-      const deadline = localStorage.getItem(`date${index}`);
+      debugger;
+      const todo = localStorage.getItem("todo"+index);
+      console.log(todo);
+      const deadline = localStorage.getItem("date"+index);
+      console.log(deadline);
       $("#todo .sortable").append(todo);
-      $(`todo${index} .deadline`).val(deadline);
+      $(`#todo${index} .deadline`).datepicker({
+        minDate: 0,
+        dateFormat: "yy-mm-dd"
+      });
+      $(`#todo${index} .deadline`).val(deadline);
     } while ( index-- );
   };
   
@@ -104,7 +117,7 @@ $(() => {
     dateFormat: "yy-mm-dd"
     });
   });
-
+  debugger;
   $(".sortable").sortable({
     connectWith: ".sortable",
     receive: function(){
@@ -116,15 +129,14 @@ $(() => {
 
   $(".tabs").tabs();
 
-  $(".deadline").datepicker({
-    minDate: 0,
-    dateFormat: "yy-mm-dd"
-    });
-
   savelocally = function(todo, num, deadline){
     console.log(num);
     localStorage.setItem("date"+num, deadline)
     localStorage.setItem("todo"+num, todo);
+    // todo-klass? eller variabel-objekt
+    
+    todos.push(todosarray);
+    localStorage.setItem("todos", JSON.stringify(todos));
     num++;
     localStorage.setItem("counter", num);
   };
@@ -133,9 +145,6 @@ $(() => {
   $("form").submit( function(event) {
       event.preventDefault();
       $(".dialog").dialog("close");
-      // keeping track of how many todos exist to keep the todo-tabs and dialogs related
-      // let todos = $(".todo");
-      // todos = todos.length;
       let num = localStorage.getItem("counter");
       const info1 = $("input[name=info1]").val();
       const title = info1.substring(0, 15);
@@ -161,7 +170,7 @@ $(() => {
                       <div id="fragment-2.${num}">${info2}</div>
                       <div id="fragment-3.${num}">${info3}</div>
                   </div>
-                  <p>Deadline:<input type="text" class="deadline bg-gray-200"></input></p>
+                  <p>Deadline:<input type="text" class="deadline bg-gray-200"></p>
                   <button data-id="todo${num}" class="delete bg-indigo-200 hover:bg-indigo-300 my-2 px-2 rounded">Delete</button>
               </div>
           </li>`;
