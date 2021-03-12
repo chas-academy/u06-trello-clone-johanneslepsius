@@ -9,42 +9,43 @@ $(() => {
     $("#review").toggle("show", "linear")
   });
 
-  // todo-objekt!!
+  
   // counter is a unique id-creator
   if(!localStorage.getItem("counter")){
     localStorage.setItem("counter", "1");
-  } else {
-    // todoarray = JSON.parse(localStorage.getItem("todos"));
-    // datesarray = JSON.parse(localStorage.getItem("todos"));
   };
 
-  // reading locally stored todos
-  if (Object.keys(localStorage)){
-    // let index = Object.keys(localStorage);
-    // index = index.length;
-    let index = localStorage.getItem("counter");
-    console.log(index);
-    do {
-      debugger;
-      const todo = localStorage.getItem("todo"+index);
-      console.log(todo);
-      const deadline = localStorage.getItem("date"+index);
-      console.log(deadline);
-      $("#todo .sortable").append(todo);
-      $(`#todo${index} .deadline`).datepicker({
-        minDate: 0,
-        dateFormat: "yy-mm-dd"
+  let todoarray = [];
+  if (localStorage.todos){
+    if (localStorage.todos !== ""){
+      todoarray = JSON.parse(localStorage.todos);
+      // console.log(todoarray);
+      todoarray.forEach( function(todo){
+        if(todo.card === ""){
+          $("#todo .sortable").append(todo.html);
+        } else {
+          $(`#${todo.card} .sortable`).append(todo.html);
+        }
+        $(`${todo.id} .deadline`).val(todo.deadline);
+        // console.log(todo);
       });
-      $(`#todo${index} .deadline`).val(deadline);
-    } while ( index-- );
+    };
   };
+  
   
 
   $(".delete").on("click", function() {
           $(".dialog").dialog("close");
-          const todo = $(this).data('id')
-          localStorage.removeItem(todo);
-          $(`#${todo}`).remove();
+          const id = $(this).data('id');
+          $("#"+id).remove();
+          // console.log(todo);
+          todoarray = JSON.parse(localStorage.todos);
+          todoarray.forEach( function(todo, index){
+            if (todo.id === "#"+id){
+              todoarray.splice(index, 1);
+            }
+          });
+          localStorage.setItem("todos", JSON.stringify(todoarray));
         });
 
   // this widget´s only purpose is to annoy the user. 
@@ -117,30 +118,51 @@ $(() => {
     dateFormat: "yy-mm-dd"
     });
   });
-  debugger;
-  $(".sortable").sortable({
-    connectWith: ".sortable",
-    receive: function(){
-      $(this).closest(".drop").effect("bounce", "slow");
-    }
-  });
 
   
 
   $(".tabs").tabs();
 
-  savelocally = function(todo, num, deadline){
-    console.log(num);
-    localStorage.setItem("date"+num, deadline)
-    localStorage.setItem("todo"+num, todo);
-    // todo-klass? eller variabel-objekt
+  let todoobject = {};
+  savelocally = function(todo, num, deadline, card, id){
+    if (todo !== ""){
+      todoobject = {
+        id: "#todo"+num,
+        html: todo,
+        deadline: deadline,
+        card: ""
+      };
+      todoarray.push(todoobject);
+    };
     
-    todos.push(todosarray);
-    localStorage.setItem("todos", JSON.stringify(todos));
-    num++;
-    localStorage.setItem("counter", num);
+    todoarray.forEach( function(todo){
+      // console.log(todo.card);
+      // console.log(id);
+      // debugger;
+      if (todo.id === id){
+        todo.card = card;
+      }
+    });
+    localStorage.setItem("todos", JSON.stringify(todoarray));
+    todoarray = JSON.parse(localStorage.todos);
+    if (num !== ""){
+      num++;
+      localStorage.setItem("counter", num);
+    };
   };
 
+  $(".sortable").sortable({
+    connectWith: ".sortable",
+    receive: function(){
+      $(this).closest(".drop").effect("bounce", "slow");
+    },
+    update: function(event, ui){
+      // console.log($("#"+ui.item[0].id).closest(".drop")[0].id);
+      let id = "#"+ui.item[0].id;
+      let card = $("#"+ui.item[0].id).closest(".drop")[0].id;
+      savelocally("", "", "", card, id);
+    }
+  });
 
   $("form").submit( function(event) {
       event.preventDefault();
@@ -207,7 +229,7 @@ $(() => {
 
       $(`#tabs${num}`).tabs();
 
-      savelocally(appendtodo, num, deadline);
+      savelocally(appendtodo, num, deadline, "", "");
 
       // unbinding the previous event handler
       $(".delete").off();
