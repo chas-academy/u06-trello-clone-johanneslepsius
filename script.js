@@ -19,7 +19,6 @@ $(() => {
   if (localStorage.todos){
     if (localStorage.todos !== ""){
       todoarray = JSON.parse(localStorage.todos);
-      // console.log(todoarray);
       todoarray.forEach( function(todo){
         if(todo.card === ""){
           $("#todo .sortable").append(todo.html);
@@ -27,7 +26,6 @@ $(() => {
           $(`#${todo.card} .sortable`).append(todo.html);
         }
         $(`${todo.id} .deadline`).val(todo.deadline);
-        // console.log(todo);
       });
     };
   };
@@ -38,7 +36,6 @@ $(() => {
           $(".dialog").dialog("close");
           const id = $(this).data('id');
           $("#"+id).remove();
-          // console.log(todo);
           todoarray = JSON.parse(localStorage.todos);
           todoarray.forEach( function(todo, index){
             if (todo.id === "#"+id){
@@ -136,9 +133,6 @@ $(() => {
     };
     
     todoarray.forEach( function(todo){
-      // console.log(todo.card);
-      // console.log(id);
-      // debugger;
       if (todo.id === id){
         todo.card = card;
       }
@@ -157,7 +151,6 @@ $(() => {
       $(this).closest(".drop").effect("bounce", "slow");
     },
     update: function(event, ui){
-      // console.log($("#"+ui.item[0].id).closest(".drop")[0].id);
       let id = "#"+ui.item[0].id;
       let card = $("#"+ui.item[0].id).closest(".drop")[0].id;
       savelocally("", "", "", card, id);
